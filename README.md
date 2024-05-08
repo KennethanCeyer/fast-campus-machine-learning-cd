@@ -1,5 +1,5 @@
+<p align="center"><img height="90" src="./assets/logo.png" /></p>
 <h1 align="center">Fast Campus Machine Learning CD(Continuous Deployment)</h1>
-<p align="center"><img height="110" src="./assets/logo.png" /></p>
 
 ## 소개
 
