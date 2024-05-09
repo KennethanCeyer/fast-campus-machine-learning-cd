@@ -6,7 +6,14 @@
 이 레포지토리는 CD(Continuous Deployment) 구성의 이해를 돕기 위해 만들어졌습니다. 폴더 내의 구조는 다음과 같습니다.
 
 ```plaintext
-
+fastcampus-mlops-cd/
+├── Dockerfile
+├── LICENSE
+├── README.md
+├── assets
+│   └── logo.png
+├── requirements.txt
+└── trainer.py
 ```
 
 ## 설치
@@ -19,6 +26,6 @@ pip3 install -r requirements.txt
 
 ```bash
 docker build \
-  -t fast-campus-machine-learning-cd:latest
-docker run fast-campus-machine-learning-cd:latest
+  -t fastcampus-mlops-cd:latest
+docker run fastcampus-mlops-cd:latest
 ```
