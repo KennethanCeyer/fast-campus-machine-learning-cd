@@ -1,4 +1,4 @@
-name: Train MNIST Model on Vertex AI
+name: Deployment (Artifact Repository)
 
 on:
   push:
