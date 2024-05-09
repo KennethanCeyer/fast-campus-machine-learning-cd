@@ -25,7 +25,7 @@ jobs:
         run: echo "::set-output name=sha::$(git rev-parse --short HEAD)"
 
       - name: Set up Cloud SDK
-        uses: google-github-actions/setup-gcloud@v0
+        uses: google-github-actions/setup-gcloud@v2
         with:
           project_id: ${{ secrets.GCP_PROJECT_ID }}
           service_account_key: ${{ secrets.GCP_SA_KEY }}
@@ -42,7 +42,7 @@ jobs:
     needs: build-and-push
     steps:
       - name: Set up Cloud SDK
-        uses: google-github-actions/setup-gcloud@v0
+        uses: google-github-actions/setup-gcloud@v2
         with:
           project_id: ${{ secrets.GCP_PROJECT_ID }}
           service_account_key: ${{ secrets.GCP_SA_KEY }}
@@ -51,7 +51,8 @@ jobs:
       - name: Submit Vertex AI training job
         run: |
           gcloud ai custom-jobs create \
+            --project fast-campus-machine-learning \
             --region=${{ env.REGION }} \
             --display-name=mnist-training-job \
-            --worker-pool-spec=machine-type=n1-standard-4,executor-image-uri=$REGION-docker.pkg.dev/$PROJECT_ID/$ARTIFACT_REPO_NAME/$IMAGE:${{ needs.build-and-push.outputs.sha }},python-module=trainer \
+            --worker-pool-spec=machine-type=n1-standard-4,executor-image-uri=$REGION-docker.pkg.dev/$PROJECT_ID/$ARTIFACT_REPO_NAME/$IMAGE:${{ needs.build-and-push.outputs.sha }},local-package-path=.,python-module=trainer \
             --args="--model-dir=gs://${{ secrets.GCP_BUCKET_NAME }}/models"
